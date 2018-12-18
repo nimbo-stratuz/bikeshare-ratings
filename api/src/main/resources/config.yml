@@ -8,8 +8,42 @@ kumuluzee:
     http:
       port: 8080
   datasources:
-  - jndi-name: jdbc/BikeshareCatalogueDS
-    connection-url: jdbc:postgresql://localhost:5432/bikeshare
+  - jndi-name: jdbc/BikeshareRatingsDS
+    connection-url: jdbc:postgresql://localhost:5432/bikeshare-ratings
     username: postgres
     password: postgres
     max-pool-size: 20
+
+  config:
+    etcd:
+      hosts: http://localhost:2379
+
+  discovery:
+    etcd:
+      hosts: http://localhost:2379
+
+  health:
+    logs:
+      enabled: true
+      level: FINE
+      period-s: 1
+    servlet:
+      mapping: /health
+      enabled: true
+    checks:
+      data-source-health-check:
+        jndi-name: jdbc/BikeshareRatingsDS
+      etcd-health-check:
+        connection-url: http://localhost:2379/health
+    metrics:
+      web-instrumentation:
+      - name: metrics-endpoint
+        url-pattern: /metrics/*
+        status-codes: "200, 500"
+      - name: prometheus-endpoint
+        url-pattern: /prometheus/*
+
+
+app-properties:
+  external-services:
+    enabled: true

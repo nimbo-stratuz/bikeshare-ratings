@@ -1,9 +1,13 @@
 package si.nimbostratuz.bikeshare.services;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import lombok.extern.java.Log;
 import si.nimbostratuz.bikeshare.models.entities.Rating;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.management.Query;
+import java.util.List;
 
 @Log
 @ApplicationScoped
@@ -34,5 +38,11 @@ public class RatingsBean extends EntityBean<Rating> {
         // TODO - delete
     }
 
+
+    public List<Rating> getAll(QueryParameters query) {
+        List<Rating> ratings  =JPAUtils.queryEntities(em, Rating.class, query);
+
+        return ratings;
+    }
 
 }
