@@ -1,5 +1,5 @@
 kumuluzee:
-  name: bikeshare-catalogue
+  name: bikeshare-ratings
   env:
     name: dev
   version: 1.0.0

@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bikeshare-registration</artifactId>
+        <artifactId>bikeshare-ratings</artifactId>
         <groupId>si.nimbostratuz.bikeshare</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bikeshare-registration-models</artifactId>
+    <artifactId>bikeshare-ratings-models</artifactId>
 
     <dependencies>
         <dependency>
