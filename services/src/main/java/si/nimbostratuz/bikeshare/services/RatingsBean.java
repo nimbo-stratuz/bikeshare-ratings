@@ -8,6 +8,7 @@ import si.nimbostratuz.bikeshare.services.configuration.AppProperties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 @Log
@@ -35,19 +36,48 @@ public class RatingsBean extends EntityBean<Rating> {
 
     @Override
     public Rating create(Rating rating) {
-        //Rating  = new Rating();
-        return rating;
+       try {
+           beginTx();
+           em.persist(rating);
+           commitTx();
+       } catch (Exception e) {
+           rollbackTx();
+           log.throwing(Rating.class.getName(), "create", e);
+           throw new BadRequestException();
+       }
+       return rating;
     }
 
     @Override
     public Rating update(Integer ratingId, Rating rating) {
-        // TODO - update
+        Rating originalRating = this.get(ratingId);
+
+        try {
+            beginTx();
+            rating.setId(originalRating.getId());
+            rating = em.merge(rating);
+            commitTx();
+        } catch (Exception e) {
+            rollbackTx();
+            log.throwing(Rating.class.getName(), "update", e);
+            throw new BadRequestException();
+        }
+
         return rating;
     }
 
     @Override
     public void delete(Integer ratingId) {
-        // TODO - delete
+        try {
+            beginTx();
+            Rating rating = this.get(ratingId);
+            em.remove(rating);
+            commitTx();
+        } catch (Exception e) {
+            rollbackTx();
+            log.throwing(Rating.class.getName(), "delete", e);
+            throw new BadRequestException();
+        }
     }
 
 
