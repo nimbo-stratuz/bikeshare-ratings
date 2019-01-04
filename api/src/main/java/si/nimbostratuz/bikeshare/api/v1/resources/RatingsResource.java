@@ -14,7 +14,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @ApplicationScoped
-@Path("rentals")
+@Path("ratings")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class RatingsResource {
@@ -25,10 +25,25 @@ public class RatingsResource {
     protected UriInfo uriInfo;
 
     @GET
+    public Response getAll() {
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Rating> rentals = ratingsBean.getAll(query);
+
+        return Response.ok(rentals).build();
+    }
+
+    @GET
     @Path("{id}")
-    public Response getRental(@PathParam("id") Integer id) {
+    public Response getRating(@PathParam("id") Integer id) {
 
         return Response.ok(ratingsBean.get(id)).build();
+    }
+
+    @GET
+    @Path("bicycle/{id}")
+    public Response getBikeRatings(@PathParam("id") Integer id) {
+
+        return Response.ok(ratingsBean.getAllBikeRatings(id)).build();
     }
 
 }
