@@ -46,4 +46,23 @@ public class RatingsResource {
         return Response.ok(ratingsBean.getAllBikeRatings(id)).build();
     }
 
+    @POST
+    public Response createRating(Rating rating) {
+        return Response.ok(ratingsBean.create(rating)).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response updateRating(@PathParam("id") Integer id, Rating rating) {
+        return Response.ok(ratingsBean.update(id, rating)).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response deleteRating(@PathParam("id") Integer id) {
+        ratingsBean.delete(id);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
 }
