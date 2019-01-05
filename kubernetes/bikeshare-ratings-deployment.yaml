@@ -13,7 +13,7 @@ spec:
         app: bikeshare-ratings
     spec:
       containers:
-      - image: nimbostratuz/bikeshare-ratings:0.19
+      - image: nimbostratuz/bikeshare-ratings:0.3
         name: bikeshare-ratings
         env:
         - name: KUMULUZEE_DISCOVERY_CLUSTER
