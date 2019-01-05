@@ -13,7 +13,7 @@ spec:
         app: bikeshare-ratings
     spec:
       containers:
-      - image: nimbostratuz/bikeshare-ratings:0.3
+      - image: nimbostratuz/bikeshare-ratings:0.4
         name: bikeshare-ratings
         env:
         - name: KUMULUZEE_DISCOVERY_CLUSTER
@@ -25,7 +25,7 @@ spec:
         - name: KUMULUZEE_HEALTH_CHECKS_ETCDHEALTHCHECK_CONNECTIONURL
           value: http://etcd:2379/health
         - name: KUMULUZEE_SERVER_BASEURL
-          value: http://159.122.186.200:31338
+          value: http://159.122.186.200:30421
 
         # Database
         - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
@@ -67,6 +67,6 @@ spec:
   type: NodePort
   ports:
   - port: 8080
-    nodePort: 31338
+    nodePort: 30421
   selector:
     app: bikeshare-ratings
