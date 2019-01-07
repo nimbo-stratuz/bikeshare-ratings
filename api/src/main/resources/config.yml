@@ -47,3 +47,4 @@ kumuluzee:
 app-properties:
   external-services:
     enabled: true
+  bonus-for-high-rating: 0.1
